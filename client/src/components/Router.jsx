@@ -6,6 +6,8 @@ import {
   } from "react-router-dom";
 import { Layout } from "./Layout";
 import {ChatView} from '../pages/chat'
+import { SettingsForm } from "../pages/settingsForm";
+import {ChannelList} from "../pages/ChannelList";
   
   export const router = createBrowserRouter([
     {
@@ -14,7 +16,11 @@ import {ChatView} from '../pages/chat'
     },
     {
       path: "/settings",
-      element: <ChatView/>,
+      element:<Layout><SettingsForm></SettingsForm></Layout>,
+    },
+    {
+      path: "/channels",
+      element:<Layout><ChannelList></ChannelList></Layout>,
     },
   ]);
   

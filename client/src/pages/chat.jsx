@@ -41,7 +41,6 @@ export function ChatView() {
 
   return (
     <Box maw={320} mx="auto">
-      <h2>{message}</h2>
           <Textarea
           onChange={changeHandler}
       placeholder="Your comment"

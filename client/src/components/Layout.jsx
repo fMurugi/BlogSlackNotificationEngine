@@ -27,17 +27,14 @@ export function Layout({children}) {
       asideOffsetBreakpoint="sm"
       navbar={
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-           <NavLink to="/settings">Settings</NavLink>
+           <NavLink to="/channels">Channels</NavLink>
+           <NavLink to="/">Notifications</NavLink>
         </Navbar>
       }
-      footer={
-        <Footer height={60} p="md">
-          Application footer
-        </Footer>
-      }
+     
       header={
         <Header height={{ base: 50, md: 70 }} p="md">
-          <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center',justifyContent:'center', height: '100%' }}>
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
@@ -48,7 +45,7 @@ export function Layout({children}) {
               />
             </MediaQuery>
 
-            <Text>Application header</Text>
+            <Text>Brenda's Blogging bot</Text>
           </div>
         </Header>
       }
