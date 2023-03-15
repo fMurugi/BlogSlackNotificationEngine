@@ -1,0 +1,38 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: myappdb
+    volumes:
+      - myappdata:/var/lib/postgresql/data
+  backend:
+    build: 
+      context: ./blogBackend
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/myappdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mysecretpassword
+    depends_on:
+      - db
+    volumes:
+      - myappdata:/var/lib/postgresql/data
+  frontend:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+volumes:
+  myappdata:
+    driver: local
+  
+
