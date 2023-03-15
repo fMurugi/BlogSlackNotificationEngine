@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import static com.fiona.Blog.SlackIntergration.sendMessageToSlack;
+import com.fiona.Blog.SlackIntergration;
 
 @RestController
 public class PostController {
@@ -19,19 +18,20 @@ public class PostController {
     @Autowired
     PostService service;
     public final ObjectMapper objectMapper;
+    @Autowired
+    SlackIntergration slackIntergration ;
 
     public PostController(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     @PostMapping(value = "/messages",consumes="application/json")
     public Post addPost(@RequestBody String postJson){
         try {
             Post post = objectMapper.readValue(postJson, Post.class);
             System.out.println("------------------------");
             System.out.println(post);
-            sendMessageToSlack(post.getMessage());
-
+            slackIntergration.sendMessageToSlack(post.getMessage());
             return service.addPost(post);
         } catch (Exception e) {
             e.printStackTrace();

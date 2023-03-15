@@ -4,20 +4,31 @@ import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.webhook.Payload;
 import com.github.seratch.jslack.api.webhook.WebhookResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+@Component
 public class SlackIntergration {
+//    @Value("${spring.webHookUrl.url}")
+    private   String webHooksUrls;
 
-    private static String webHooksUrls=System.getProperty("webHookUrl.url");
     @Value("${OAuthToken}")
     private static String oAuthToken ;
+
+    @Value("${spring.webHookUrl.url}")
+    public void setWebHooksUrls(String webHooksUrls) {
+        this.webHooksUrls = webHooksUrls;
+    }
     private static  String slackChannel ="announcements";
+
+
 
 //    public static void main(String[] args) {
 ////        System.out.println("Test message");
 //        sendMessageToSlack("Hello everyone. ");
 //    }
 
-    public static void sendMessageToSlack(String message){
+    public  void sendMessageToSlack(String message){
         try {
             StringBuilder messageBuilder = new StringBuilder();
             messageBuilder.append(message);
