@@ -1,13 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { useForm } from '@mantine/form';
-import { TextInput, Checkbox, Box, Textarea, Button } from '@mantine/core';
-// import {Send} from '@tabler/core'
-
-// interface FormValues {
-//   email: string;
-//   terms: boolean;
-// }
+import { TextInput, Checkbox, Box, Textarea, Button, Flex } from '@mantine/core';
+import { IconSend } from '@tabler/icons-react'
 
 
 export function ChatView() {
@@ -28,10 +23,10 @@ export function ChatView() {
       headers: {
         'Content-Type': 'application/json'
       },
-     body: JSON.stringify(payload),
-     
+      body: JSON.stringify(payload),
+
     })
-    if(!response.ok){
+    if (!response.ok) {
       throw Error('Error when trying to send notification')
     }
     return response.json().then(data => {
@@ -40,15 +35,25 @@ export function ChatView() {
   }
 
   return (
-    <Box maw={320} mx="auto">
-          <Textarea
-          onChange={changeHandler}
-      placeholder="Your comment"
-      radius="md"
-    />
-    <Button onClick={postNotification}  variant="white">
-      Send notification
-    </Button>
-    </Box>
+    <div style={{
+      maxWidth: '640px',
+      margin: "20px auto"
+    }}>
+    <Flex direction={"column"} columnGap="md" rowGap={"md"}>
+      <Textarea
+        onChange={changeHandler}
+        placeholder="Your comment"
+        radius="md"
+        autosize
+        minRows={8 }
+      />
+      <Flex justify={"end"}>
+
+      <Button leftIcon={<IconSend size="1rem" />} onClick={postNotification} variant="white">
+        Send notification
+      </Button>
+      </Flex>
+    </Flex>
+    </div>
   );
 }

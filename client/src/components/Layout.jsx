@@ -3,15 +3,12 @@ import {
   AppShell,
   Navbar,
   Header,
-  Footer,
-  Aside,
   Text,
   MediaQuery,
   Burger,
   useMantineTheme,
 } from '@mantine/core';
-import {Link} from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { SideBarMenu } from './SideBarMenu';
 
 export function Layout({children}) {
   const theme = useMantineTheme();
@@ -27,8 +24,7 @@ export function Layout({children}) {
       asideOffsetBreakpoint="sm"
       navbar={
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-           <NavLink to="/channels">Channels</NavLink>
-           <NavLink to="/">Notifications</NavLink>
+           <SideBarMenu></SideBarMenu>
         </Navbar>
       }
      
@@ -45,7 +41,7 @@ export function Layout({children}) {
               />
             </MediaQuery>
 
-            <Text>Brenda's Blogging bot</Text>
+            <Text fz="xl">Brenda's Blogging bot</Text>
           </div>
         </Header>
       }
