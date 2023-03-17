@@ -1,8 +1,7 @@
 
 # Project Title
 
-A brief description of what this project does and who it's for
-
+A notification engine to send notification to slack through a webpage and configureslack using the web page
 
 ## run
 
